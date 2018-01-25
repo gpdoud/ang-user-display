@@ -1,3 +1,6 @@
+# The 'You can do this' assignment
+## Build an Angular application using a real JSON service
+
 1) Generate your project
   a) include routing
 2) Run the project
