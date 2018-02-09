@@ -1,65 +1,34 @@
-# The 'You can do this' assignment
-## Build an Angular application using a real JSON service
+# Angular project to read C#/MVC/WebAPI/SQL Server backend
 
-1) Generate your project
-  a) include routing
-2) Run the project
-3) Change AppComponent html to include <router-outlet>
-4) Create the user.ts class
-5) Create the user.service.ts service
-  a) Import Injectable, HttpClient, Observable, User
-  b) Create url constant for http address
-  c) Add service decorator
-  d) Add class name and export
-  e) Add default constructor
-  f) Inject HttpClient using http property(variable)
-6) Generate user-list and user-detail components in app/user folder
-7) Wire up your app-routing
-  a) Import UserListComponent & UserDetailComponent (Can copy imports from AppModule)
-  b) Add route { path: '', redirectTo: '/users/list', pathMatch: 'full' }
-  c) Add routes for UserListComponent and UserDetailComponent 
-            { path: 'users/list', component: UserListComponent }
-  d) Add route: { path: '**', component: ? }
-8) Additions to AppModule
-  a) Import FormsModule from @angular/forms
-  b) Import HttpClientModule from @angular/common/http;
-  c) Import UserService
-  d) Add FormsModule to imports array
-  e) Add HttpClientModule to imports array
-  f) Add UserService to ? array
-9) Modify the UserListComponent.ts
-  a) Import UserService and User
-  b) Inside the class, create a property for User[] (I called mine users)
-  c) Inject the UserService into the component as UserSvc
-  d) Inside ngOnInit()
-    i) Create a console log message saying, "Getting user list ..."
-    ii) Call the list() method of UserService subscribing to the data
-            this.UserSvc.list()
-              .subscribe(users => {
-                this.users = users;
-                console.log(users);
-              })
-10) Modify the UserListComponent.html
-  a) Add a <table>
-  b) Add ngFor on <tr> to iterate through users
-  c) Concatenate the FirstName and LastName to get Full Name
-  d) Use ternary operator to display Yes if booleans are true
-11) Modify the UserDetailComponent.ts
-  a) Import Router & ActivatedRouter from @angular/router
-  b) Import UserService and User
-  c) Create a property for an instance of User
-  d) Inject UserService as UserSvc, Router as router, and 
-      ActivatedRoute as route into the component
-  e) Include the following code in ngOnInit:
-          let id: string;
-          this.route.params.subscribe(params => id = params["id"]);
-          console.log("id is ", id);
-          console.log("Getting user ...");
-          this.UserSvc.get(id)
-            .subscribe(user => this.user = user);
-12) Modify UserDetailComponent.html
-  a) Add <table>
-  b) Add a row for each property of user
-    i) Label in first column, data in the second column
-  c) Concatenate the FirstName and LastName to get Full Name
-  d) Use ternary operator to display Yes if booleans are true
+Follow the steps to build the Angular app.
+
+    1. Create the project named *angular-to-webapi* and include routing
+    2. in app.module.ts
+      2.1. Import FormsModule and add to appropriate decorator key
+      2.2. Import HttpClientModule and add to appropriate decorator key 
+    3. Create the following folders under the *app* folder
+      3.1. Create a folder named *model* under *app* folder
+      3.2. Create a folder named *service* under *app* folder
+      3.3. Create a folder named *user* under *app* folder
+    4. Generate a *class* file named *user.ts* in the *user* folder
+    5. Create the class *User* in the *user.ts* file with the following properties and methods (make sure you export it)
+      5.1. ID: number;
+      5.2. UserName: string;
+      5.3. Password: string;
+      5.4. FirstName: string;
+      5.5. LastName: string;
+      5.6. Phone: string;
+      5.7. Email: string;
+      5.8. IsReviewer: boolean;
+      5.9. IsAdmin: boolean;
+      5.10. Add a constructor to the *User* class that initializes all properties
+    6. Create the service *user.service.ts* in the *app/service* folder
+    7. Add an import and appropriate decorator key for *user.service.ts* to *app.module.ts*.
+    8. Make the following changes in *user.service.ts*:
+      8.1. Add an import for *HttpClient* from *@angular/common/http*
+      8.2. Add an import for *Observable* from *rxjs/Observable*
+      8.3. Add an import for *User* from *app/model/user* (user relative path!)
+      8.4. Inject *UserService* into the class as *UserSvc*
+      8.5. Create a function in the class named *list()* that returns a type of *Observable<User[]>*
+      8.6. In the body of the *list()* function
+        8.6.1. Make a call to the *get(..)* function of the *UserSrv* passing the following url 'http://prs.doudsystems.com/Users/List'. Return the result of this function call as *Observable<User[]>*
